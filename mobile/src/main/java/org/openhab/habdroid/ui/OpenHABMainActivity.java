@@ -585,6 +585,9 @@ public class OpenHABMainActivity extends AppCompatActivity implements
                     case R.id.notifications:
                         openNotifications(null);
                         return true;
+                    case R.id.homeautomation:
+                        openHomeAutomation();
+                        return true;
                     case R.id.settings:
                         Intent settingsIntent = new Intent(OpenHABMainActivity.this,
                                 OpenHABPreferencesActivity.class);
@@ -665,6 +668,11 @@ public class OpenHABMainActivity extends AppCompatActivity implements
             openNotifications(mPendingOpenedNotificationId);
             mPendingOpenedNotificationId = null;
         }
+    }
+
+    private void openHomeAutomation() {
+        Toast toast = Toast.makeText(this, "Talent HomeAutomation", Toast.LENGTH_LONG);
+        toast.show();
     }
 
     private void openPendingNfcPageIfNeeded() {

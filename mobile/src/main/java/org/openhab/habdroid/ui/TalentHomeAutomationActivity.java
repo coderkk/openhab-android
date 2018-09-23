@@ -9,13 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.util.Log;
 
 import org.openhab.habdroid.R;
+import org.openhab.habdroid.model.OpenHABSitemap;
 import org.openhab.habdroid.util.Util;
 
 public class TalentHomeAutomationActivity extends AppCompatActivity implements
         FragmentManager.OnBackStackChangedListener {
     private final static String TAG = TalentHomeAutomationActivity.class.getSimpleName();
+
+    private OpenHABSitemap mSelectedSitemap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +29,13 @@ public class TalentHomeAutomationActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_talent_home_automation);
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mSelectedSitemap = (OpenHABSitemap) getIntent().getParcelableExtra("selectedSitemap");
+
+        Log.d(TAG, "Sitemap : " + mSelectedSitemap);
 
         //Toolbar toolbar = findViewById(R.id.openhab_toolbar);
         //setSupportActionBar(toolbar);

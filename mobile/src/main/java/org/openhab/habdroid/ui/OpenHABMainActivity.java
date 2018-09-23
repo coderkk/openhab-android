@@ -671,8 +671,11 @@ public class OpenHABMainActivity extends AppCompatActivity implements
     }
 
     private void openHomeAutomation() {
-        Toast toast = Toast.makeText(this, "Talent HomeAutomation", Toast.LENGTH_LONG);
-        toast.show();
+        //Toast toast = Toast.makeText(this, "Talent HomeAutomation", Toast.LENGTH_LONG);
+        //toast.show();
+
+        Intent activityTalentHomeAutomation = new Intent(this, TalentHomeAutomationActivity.class);
+        startActivity(activityTalentHomeAutomation);
     }
 
     private void openPendingNfcPageIfNeeded() {

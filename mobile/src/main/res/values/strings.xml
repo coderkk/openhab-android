@@ -228,4 +228,7 @@
     <!-- Intro "DONE" button -->
     <string name="app_intro_done_button">DONE</string>
     <string name="title_activity_talent_home_automation">Talent HomeAutomation</string>
+    <string name="title_activity_talent_home_auto_wizard">TalentHomeAutoWizardActivity</string>
+    <string name="title_activity_talent_home_auto_item_wizard">Item Wizard</string>
+    <string name="title_activity_talent_home_auto_time_wizard">Time Wizard</string>
 </resources>

@@ -110,8 +110,11 @@
 
         <activity
             android:name=".ui.TalentHomeAutomationActivity"
-            android:label="@string/title_activity_talent_home_automation">
-        </activity>
+            android:label="@string/title_activity_talent_home_automation"></activity>
+        <activity
+            android:name=".ui.TalentHomeAutoWizardActivity"
+            android:label="@string/title_activity_talent_home_auto_wizard"
+            android:theme="@style/HABDroid.Light"></activity>
     </application>
 
 </manifest>

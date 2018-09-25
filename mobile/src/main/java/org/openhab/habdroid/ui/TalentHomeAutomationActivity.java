@@ -1,5 +1,7 @@
 package org.openhab.habdroid.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +22,7 @@ public class TalentHomeAutomationActivity extends AppCompatActivity implements
     private final static String TAG = TalentHomeAutomationActivity.class.getSimpleName();
 
     private OpenHABSitemap mSelectedSitemap;
+    private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,6 @@ public class TalentHomeAutomationActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mSelectedSitemap = (OpenHABSitemap) getIntent().getParcelableExtra("selectedSitemap");
 
         Log.d(TAG, "Sitemap : " + mSelectedSitemap);
@@ -45,8 +47,10 @@ public class TalentHomeAutomationActivity extends AppCompatActivity implements
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Snackbar.make(view, "Replace with your o wn action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                Intent talentHomeAutoWizardActivity = new Intent(mContext, TalentHomeAutoWizardActivity.class);
+                startActivity(talentHomeAutoWizardActivity);
             }
         });
 

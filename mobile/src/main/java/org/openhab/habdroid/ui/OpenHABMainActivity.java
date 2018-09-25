@@ -674,11 +674,10 @@ public class OpenHABMainActivity extends AppCompatActivity implements
         //toast.show();
 
         Intent activityTalentHomeAutomation = new Intent(this, TalentHomeAutomationActivity.class);
-        // Bundle bundle = new Bundle();
-        // bundle.putParcelable("selectedSitemap", mSelectedSitemap);
         activityTalentHomeAutomation.putExtra("selectedSitemap", mSelectedSitemap);
 
-        // activityTalentHomeAutomation.putExtra("talentHomeAuto", bundle);
+        Log.d(TAG, "SitemapList : " + mSitemapList);
+
         startActivity(activityTalentHomeAutomation);
     }
 

@@ -5,8 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private final Drawable mDivider;
@@ -21,7 +21,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view,
-                               RecyclerView parent, RecyclerView.State state) {
+            RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         if (mDivider != null && !suppressDividerForChild(view, parent)) {
             outRect.bottom = mDivider.getIntrinsicHeight();

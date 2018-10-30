@@ -24,22 +24,23 @@
 package de.duenndns.ssl;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.DialogInterface;
-import android.content.DialogInterface.*;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import androidx.appcompat.app.AlertDialog;
 
 import org.openhab.habdroid.R;
 import org.openhab.habdroid.util.Util;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MemorizingActivity extends Activity
 		implements OnClickListener,OnCancelListener {
@@ -53,7 +54,7 @@ public class MemorizingActivity extends Activity
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		mThemedContext = new ContextThemeWrapper(this, Util.getActivityThemeID(this));
+		mThemedContext = new ContextThemeWrapper(this, Util.getActivityThemeId(this));
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			TypedValue typedValue = new TypedValue();

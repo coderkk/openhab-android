@@ -1,7 +1,6 @@
 package org.openhab.habdroid.core.connection;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import org.openhab.habdroid.util.AsyncHttpClient;
 import org.openhab.habdroid.util.SyncHttpClient;
@@ -42,6 +41,7 @@ public interface Connection {
      * @return The username used for this connection.
      */
     @Nullable String getUsername();
+
     @Nullable String getPassword();
 
     /**

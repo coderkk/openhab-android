@@ -1,13 +1,12 @@
 package org.openhab.habdroid;
 
-import android.support.annotation.NonNull;
-import android.support.test.espresso.IdlingResource;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.test.espresso.IdlingResource;
 
-import org.openhab.habdroid.ui.OpenHABWidgetListFragment;
+import org.openhab.habdroid.ui.WidgetListFragment;
 import org.openhab.habdroid.ui.activity.ContentController;
-import org.openhab.habdroid.ui.activity.PageConnectionHolderFragment;
 
 public class FragmentStatusIdlingResource implements IdlingResource {
     private final String mName;
@@ -43,8 +42,8 @@ public class FragmentStatusIdlingResource implements IdlingResource {
             if (f instanceof ContentController.ProgressFragment) {
                 return true;
             }
-            if (f instanceof OpenHABWidgetListFragment) {
-                if (((OpenHABWidgetListFragment) f).mRecyclerView.hasPendingAdapterUpdates()) {
+            if (f instanceof WidgetListFragment) {
+                if (((WidgetListFragment) f).mRecyclerView.hasPendingAdapterUpdates()) {
                     return true;
                 }
             }

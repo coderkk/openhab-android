@@ -11,8 +11,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.google.gms:google-services:4.1.0'
-        classpath 'io.fabric.tools:gradle:1.26.0'
+        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'io.fabric.tools:gradle:1.26.1'
         classpath files('libs/gradle-witness.jar')
     }
 }
@@ -25,18 +25,18 @@ if(!isFoss) {
 apply plugin: 'witness'
 
 android {
-    buildToolsVersion '27.0.3'
-    compileSdkVersion 27
+    buildToolsVersion '28.0.3'
+    compileSdkVersion 28
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "org.openhab.habdroid"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 84
-        versionName "2.3.2-beta"
+        versionCode 88
+        versionName "2.3.8-beta"
         multiDexEnabled true
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         def IS_DEVELOPER = "IS_DEVELOPER"
@@ -99,24 +99,27 @@ repositories {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:27.1.1"
-    implementation "com.android.support:support-v4:27.1.1"
-    implementation "com.android.support:recyclerview-v7:27.1.1"
-    implementation "com.android.support:design:27.1.1"
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "com.google.android.material:material:1.0.0"
+    implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'org.jmdns:jmdns:3.5.4'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.github.heremaps:oksse:0.9.0'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.github.BigBadaboom:androidsvg:3511e136498da94018ef9fa438895984ea9b99db'
-    implementation 'com.github.apl-devs:appintro:v4.2.3'
+    implementation ('com.github.paolorotolo:appintro:v5.1.0') {
+        transitive false
+        exclude group: 'com.intellij', module: 'annotations'
+    }
     // Google Maps
     fullImplementation 'com.google.android.gms:play-services-maps:12.0.1'
     // GCM
     fullImplementation 'com.google.android.gms:play-services-gcm:12.0.1'
 
     // About screen
-    implementation 'com.github.daniel-stoneuk:material-about-library:2.3.0'
+    implementation 'com.github.daniel-stoneuk:material-about-library:2.4.2'
     // Used libraries
     implementation('com.mikepenz:aboutlibraries:6.0.8@aar') {
         transitive = true
@@ -134,7 +137,7 @@ dependencies {
     annotationProcessor 'com.google.auto.value:auto-value:1.6.2'
     annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
 
-    testImplementation 'org.mockito:mockito-core:2.22.0'
+    testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.json:json:20180813'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
@@ -145,13 +148,13 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4:1.7.4'
 
     // Espresso UI tests
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2', {
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2', {
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 

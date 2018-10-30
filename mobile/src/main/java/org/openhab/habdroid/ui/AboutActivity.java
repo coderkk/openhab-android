@@ -4,18 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.danielstone.materialaboutlibrary.MaterialAboutFragment;
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem;
@@ -24,7 +24,6 @@ import com.danielstone.materialaboutlibrary.items.MaterialAboutTitleItem;
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard;
 import com.danielstone.materialaboutlibrary.model.MaterialAboutList;
 import com.mikepenz.aboutlibraries.LibsBuilder;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openhab.habdroid.BuildConfig;
@@ -45,9 +44,7 @@ import java.util.Locale;
 import static org.openhab.habdroid.util.Util.obfuscateString;
 
 public class AboutActivity extends AppCompatActivity implements
-        FragmentManager.OnBackStackChangedListener{
-    private final static String TAG = AboutActivity.class.getSimpleName();
-
+        FragmentManager.OnBackStackChangedListener  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Util.setActivityTheme(this);
@@ -103,8 +100,8 @@ public class AboutActivity extends AppCompatActivity implements
     }
 
     public static class AboutMainFragment extends MaterialAboutFragment {
-        private final static String TAG = AboutMainFragment.class.getSimpleName();
-        private final static String URL_TO_GITHUB = "https://github.com/openhab/openhab-android";
+        private static final String TAG = AboutMainFragment.class.getSimpleName();
+        private static final String URL_TO_GITHUB = "https://github.com/openhab/openhab-android";
         private ServerProperties mServerProperties;
         private Connection mConnection;
 
@@ -115,7 +112,9 @@ public class AboutActivity extends AppCompatActivity implements
             mServerProperties = getArguments().getParcelable("serverProperties");
             try {
                 mConnection = ConnectionFactory.getUsableConnection();
-            } catch (ConnectionException ignored) {}
+            } catch (ConnectionException ignored) {
+                // ignored
+            }
             return super.onCreateView(inflater, container, savedInstanceState);
         }
 
@@ -140,50 +139,48 @@ public class AboutActivity extends AppCompatActivity implements
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_changelog)
                     .icon(R.drawable.ic_track_changes_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect(URL_TO_GITHUB + "/releases"))
+                    .setOnClickAction(clickRedirect(URL_TO_GITHUB + "/releases"))
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_source_code)
                     .icon(R.drawable.ic_github_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect(URL_TO_GITHUB))
+                    .setOnClickAction(clickRedirect(URL_TO_GITHUB))
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_issues)
                     .icon(R.drawable.ic_bug_report_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect(URL_TO_GITHUB + "/issues"))
+                    .setOnClickAction(clickRedirect(URL_TO_GITHUB + "/issues"))
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_license_title)
                     .subText(R.string.about_license)
                     .icon(R.drawable.ic_account_balance_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect(URL_TO_GITHUB + "/blob/master/LICENSE"))
+                    .setOnClickAction(clickRedirect(URL_TO_GITHUB + "/blob/master/LICENSE"))
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.title_activity_libraries)
                     .icon(R.drawable.ic_developer_mode_grey_24dp)
-                    .setOnClickAction(new MaterialAboutItemOnClickAction() {
-                        @Override
-                        public void onClick() {
-                            Fragment f = new LibsBuilder()
-                                    .withFields(R.string.class.getFields())
-                                    .withLicenseShown(true)
-                                    .withAutoDetect(true)
-                                    .supportFragment();
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
-                                            R.anim.slide_in_left, R.anim.slide_out_right)
-                                    .replace(R.id.about_container, f)
-                                    .setBreadCrumbTitle(R.string.title_activity_libraries)
-                                    .addToBackStack(null)
-                                    .commit();
-                        }
+                    .setOnClickAction(() -> {
+                        Fragment f = new LibsBuilder()
+                                .withFields(R.string.class.getFields())
+                                .withLicenseShown(true)
+                                .withAutoDetect(true)
+                                .supportFragment();
+                        getFragmentManager()
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                                        R.anim.slide_in_left, R.anim.slide_out_right)
+                                .replace(R.id.about_container, f)
+                                .setBreadCrumbTitle(R.string.title_activity_libraries)
+                                .addToBackStack(null)
+                                .commit();
                     })
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_privacy_policy)
                     .icon(R.drawable.ic_security_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect("https://www.openhabfoundation.org/privacy"))
+                    .setOnClickAction(
+                            clickRedirect("https://www.openhabfoundation.org/privacy.html"))
                     .build());
 
             MaterialAboutCard.Builder ohServerCard = new MaterialAboutCard.Builder();
@@ -237,22 +234,22 @@ public class AboutActivity extends AppCompatActivity implements
             ohCommunityCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_docs)
                     .icon(R.drawable.ic_collections_bookmark_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect("https://www.openhab.org/docs/"))
+                    .setOnClickAction(clickRedirect("https://www.openhab.org/docs/"))
                     .build());
             ohCommunityCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_community_forum)
                     .icon(R.drawable.ic_forum_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect("https://community.openhab.org/"))
+                    .setOnClickAction(clickRedirect("https://community.openhab.org/"))
                     .build());
             ohCommunityCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_translation)
                     .icon(R.drawable.ic_language_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect("https://crowdin.com/profile/openhab-bot"))
+                    .setOnClickAction(clickRedirect("https://crowdin.com/profile/openhab-bot"))
                     .build());
             ohCommunityCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.about_foundation)
                     .icon(R.drawable.ic_people_grey_24dp)
-                    .setOnClickAction(MaterialAboutItemOnClickRedirect("https://www.openhabfoundation.org/"))
+                    .setOnClickAction(clickRedirect("https://www.openhabfoundation.org/"))
                     .build());
 
             return new MaterialAboutList.Builder()
@@ -264,17 +261,14 @@ public class AboutActivity extends AppCompatActivity implements
 
         @Override
         protected int getTheme() {
-            return Util.getActivityThemeID(getActivity());
+            return Util.getActivityThemeId(getActivity());
         }
 
-        private MaterialAboutItemOnClickAction MaterialAboutItemOnClickRedirect(final String url) {
-            return new MaterialAboutItemOnClickAction() {
-                @Override
-                public void onClick() {
-                    Uri uri = Uri.parse(url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                }
+        private MaterialAboutItemOnClickAction clickRedirect(final String url) {
+            return () -> {
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             };
         }
 
